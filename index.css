@@ -290,7 +290,7 @@
 
   /* Floating button */
   #ai-chat-btn {
-    position: fixed; bottom: 28px; right: 28px; z-index: 9000;
+    position: fixed; bottom: 55px; right: 28px; z-index: 9000;
     width: 58px; height: 58px; border-radius: 50%;
     background: linear-gradient(135deg, #00f5ff, #bf5af2);
     border: none; cursor: pointer;
@@ -416,6 +416,8 @@
   #ai-send-btn:hover { opacity: 0.85; transform: scale(1.05); }
   #ai-send-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
   #ai-send-btn svg { width: 15px; height: 15px; fill: #050810; }
+
+  
 
   /* Mobile chat adjustments */
   @media (max-width: 480px) {
