@@ -2,7 +2,7 @@ const OpenAI = require("openai");
 
 const client = new OpenAI({
   apiKey: process.env.GROK_API_KEY,
-  baseURL: "https://api.x.ai/v1"
+  baseURL: "https://api.x.ai/v1.demo"
 });
 
 exports.handler = async function(event) {
