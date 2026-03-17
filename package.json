@@ -1,0 +1,24 @@
+{
+  "name": "html-and-css",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romanaliengineer-jpg/portfolio-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/romanaliengineer-jpg/portfolio-website/issues"
+  },
+  "homepage": "https://github.com/romanaliengineer-jpg/portfolio-website#readme",
+  "dependencies": {
+    "openai": "^6.31.0"
+  }
+}
