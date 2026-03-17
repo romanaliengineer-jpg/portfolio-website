@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Your Name — Frontend Developer</title>
+<title>Romanportfoliowebsite.com</title>
+<link rel="icon" type="image/png" href="roman3.jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
 <!-- ✅ EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -38,7 +39,7 @@
     content: '';
     position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0; opacity: 0.4;
+    pointer-events: none; z-index: 0; opacity: 0.3;
   }
 
   .grid-bg {
@@ -47,7 +48,7 @@
       linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
     background-size: 200px,200px;
-    animation: gridShift 20s linear infinite;
+    animation: gridShift 10s linear infinite;
   }
   @keyframes gridShift {
     0% { background-position: 0 0; }
@@ -55,7 +56,7 @@
   }
 
   .menu-btn {
-    display: none; flex-direction: column; gap: 5px;
+    display: flex; flex-direction: column; gap: 5px;
     cursor: pointer; background: none; border: none; padding: 4px; z-index: 200;
   }
   .menu-btn span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s ease; }
@@ -70,8 +71,16 @@
   }
   .theme-toggle:hover { border-color: var(--neon); color: var(--neon); }
 
+  .signout-btn {
+    background: var(--neon3); border: 1px solid var(--neon3); color: var(--bg);
+    cursor: pointer; font-size: 0.75rem; padding: 6px 14px; letter-spacing: 1px;
+    transition: background 0.3s, border-color 0.3s; font-family: 'Space Mono', monospace;
+    margin-left: 10px;
+  }
+  .signout-btn:hover { background: var(--neon); border-color: var(--neon); }
+
   .mobile-menu {
-    display: none; position: fixed; top: 0; left: 0;
+    display: flex; position: fixed; top: 0; left: 0;
     width: 260px; height: 100vh; background: var(--surface);
     border-right: 1px solid var(--border); z-index: 150;
     padding: 100px 40px 40px; flex-direction: column; gap: 30px;
@@ -82,6 +91,48 @@
   .mobile-menu a:hover { color: var(--neon); }
   .menu-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 140; }
   .menu-overlay.open { display: block; }
+
+  .close-btn {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; color: var(--text);
+    font-size: 1.5rem; cursor: pointer; z-index: 160;
+    transition: color 0.3s;
+  }
+  .close-btn:hover { color: var(--neon); }
+
+  /* MODAL STYLES */
+  .modal {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.7); align-items: center; justify-content: center;
+  }
+  .modal.show { display: flex; }
+  .modal-content {
+    background: var(--card); border: 1px solid var(--border); padding: 30px;
+    border-radius: 8px; max-width: 400px; width: 90%; position: relative;
+    clip-path: polygon(16px 0%, 100% 0%, calc(100% - 16px) 100%, 0% 100%);
+  }
+  .modal-close {
+    position: absolute; top: 15px; right: 15px;
+    background: none; border: none; color: var(--text);
+    font-size: 1.2rem; cursor: pointer; transition: color 0.3s;
+  }
+  .modal-close:hover { color: var(--neon); }
+  .modal .form-group { margin-bottom: 16px; }
+  .modal .form-group label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: block; }
+  .modal .form-group input {
+    width: 100%; background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); padding: 12px 16px; font-family: 'Space Mono', monospace;
+    font-size: 0.8rem; outline: none; transition: border-color 0.3s;
+  }
+  .modal .form-group input:focus { border-color: var(--neon); }
+
+  /* SIGN OUT STYLES */
+  .signout-link {
+    color: var(--neon3) !important; margin-top: 10px; padding: 8px 12px;
+    background: rgba(255,55,95,0.1); border: 1px solid var(--neon3);
+    border-radius: 4px; transition: background 0.3s, border-color 0.3s;
+  }
+  .signout-link:hover { background: rgba(255,55,95,0.2); border-color: var(--neon); }
 
   body.light {
     --bg: #f5f5f0; --surface: #ebebE5; --card: #e0e0da;
@@ -98,7 +149,6 @@
 
   @media (max-width: 600px) {
     .menu-btn { display: flex; }
-    .mobile-menu { display: flex; }
     nav ul { display: none !important; }
   }
 
@@ -288,15 +338,63 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="theme-toggle" id="themeToggle">☀ Light</button>
+  <button class="signout-btn" id="navSignoutBtn" style="display: none;">Sign Out</button>
 </nav>
 
 <div class="menu-overlay" id="menuOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" id="closeBtn" aria-label="Close menu">✕</button>
   <a href="#hero" class="nav-link">Home</a>
   <a href="#skills" class="nav-link">Skills</a>
   <a href="#projects" class="nav-link">Projects</a>
   <a href="#contact" class="nav-link">Contact</a>
+  <div style="border-top: 1px solid var(--border); margin: 20px 0; padding-top: 20px;">
+    <a href="#" class="nav-link" id="loginLink" style="color: var(--neon);">Login</a>
+    <a href="#" class="nav-link" id="signupLink" style="color: var(--neon2);">Sign Up</a>
+    <a href="#" class="nav-link signout-link" id="signoutLink">Sign Out</a>
+  </div>
   <button class="theme-toggle" id="themeToggleMobile" style="width:fit-content;margin-top:10px;">☀ Light</button>
+</div>
+
+<!-- AUTH MODALS -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <button class="modal-close" id="loginModalClose">✕</button>
+    <h2 style="color: var(--neon); margin-bottom: 20px;">Login</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required>
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required>
+      </div>
+      <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="signupModal">
+  <div class="modal-content">
+    <button class="modal-close" id="signupModalClose">✕</button>
+    <h2 style="color: var(--neon2); margin-bottom: 20px;">Sign Up</h2>
+    <form id="signupForm">
+      <div class="form-group">
+        <label for="signupName">Name</label>
+        <input type="text" id="signupName" required>
+      </div>
+      <div class="form-group">
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" required>
+      </div>
+      <div class="form-group">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" required>
+      </div>
+      <button type="submit" class="btn-primary" style="width: 100%;">Sign Up</button>
+    </form>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -358,7 +456,7 @@
 <section id="projects">
   <div class="section-header">
     <span class="section-tag">// 03 — what I built</span>
-    <h2 class="section-title">Featured<br/>Projects</h2>
+    <h2 class="section-title">My<br/>Projects</h2>
   </div>
   <div class="projects-grid">
     <div class="project-card">
@@ -632,13 +730,130 @@
     mobileMenu.classList.remove('open');
     menuOverlay.classList.remove('open');
   });
+  document.getElementById('closeBtn').addEventListener('click', () => {
+    menuBtn.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    menuOverlay.classList.remove('open');
+  });
   document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+      // Don't close menu for auth links (they open modals)
+      if (link.id === 'loginLink' || link.id === 'signupLink' || link.id === 'signoutLink') return;
       menuBtn.classList.remove('open');
       mobileMenu.classList.remove('open');
       menuOverlay.classList.remove('open');
     });
   });
+
+  // =============================================
+  // AUTHENTICATION
+  // =============================================
+  const loginModal = document.getElementById('loginModal');
+  const signupModal = document.getElementById('signupModal');
+  const loginLink = document.getElementById('loginLink');
+  const signupLink = document.getElementById('signupLink');
+  const signoutLink = document.getElementById('signoutLink');
+
+  // Show modals
+  loginLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginModal.classList.add('show');
+  });
+  signupLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    signupModal.classList.add('show');
+  });
+
+  // Close modals
+  document.getElementById('loginModalClose').addEventListener('click', () => {
+    loginModal.classList.remove('show');
+  });
+  document.getElementById('signupModalClose').addEventListener('click', () => {
+    signupModal.classList.remove('show');
+  });
+
+  // Close on outside click
+  loginModal.addEventListener('click', (e) => {
+    if (e.target === loginModal) loginModal.classList.remove('show');
+  });
+  signupModal.addEventListener('click', (e) => {
+    if (e.target === signupModal) signupModal.classList.remove('show');
+  });
+
+  // Login form
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    // Demo: check if user exists in localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      showToast('✅ Login successful!', false);
+      loginModal.classList.remove('show');
+      updateAuthUI();
+    } else {
+      showToast('❌ Invalid credentials', true);
+    }
+  });
+
+  // Signup form
+  document.getElementById('signupForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('signupName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    if (users.find(u => u.email === email)) {
+      showToast('❌ Email already exists', true);
+      return;
+    }
+    
+    users.push({ name, email, password });
+    localStorage.setItem('users', JSON.stringify(users));
+    showToast('✅ Account created! Please login.', false);
+    signupModal.classList.remove('show');
+  });
+
+  // Sign out
+  signoutLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem('currentUser');
+    showToast('👋 Signed out successfully', false);
+    updateAuthUI();
+  });
+
+  // Nav sign out button
+  const navSignoutBtn = document.getElementById('navSignoutBtn');
+  navSignoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    showToast('👋 Signed out successfully', false);
+    updateAuthUI();
+  });
+
+  // Update UI based on auth state
+  function updateAuthUI() {
+    const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    if (user) {
+      loginLink.style.display = 'none';
+      signupLink.style.display = 'none';
+      signoutLink.style.display = 'block';
+      signoutLink.textContent = `Sign Out (${user.name})`;
+      navSignoutBtn.style.display = 'inline-block';
+    } else {
+      loginLink.style.display = 'block';
+      signupLink.style.display = 'block';
+      signoutLink.style.display = 'none';
+      navSignoutBtn.style.display = 'none';
+    }
+  }
+
+  // Initialize auth UI
+  updateAuthUI();
 </script>
 </body>
 </html>
