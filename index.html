@@ -866,11 +866,11 @@ RULES:
     aiScrollBottom();
 
     try {
-      const res = await fetch('/.netlify/functions/chat', {
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${process.env.GROQ_API_KEY}` },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'llama-3.3-70b-versatile',
           max_tokens: 1000,
           system: AI_SYSTEM,
           messages: aiHistory,
